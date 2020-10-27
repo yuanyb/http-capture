@@ -26,5 +26,5 @@ Go实现的一个命令行HTTP抓包工具
     - `set body -id reqId -v val`        设置某个请求的Body，仅对POST请求有效，可用于修改json
     
 ### 演示：
-
+> 浏览器需要先设置代理，如 `localhost:8888`
 ![hc](md_image/hc.png)
