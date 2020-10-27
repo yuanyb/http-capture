@@ -85,7 +85,7 @@ func writeBack(writer http.ResponseWriter, request *http.Request) {
 	request.RequestURI = "" // 作为客户端请求，必须清空，文档要求的
 	resp, err := http.DefaultClient.Do(request)
 	if err != nil {
-	    _, _ = writer.Write([]byte(err.Error()))
+		_, _ = writer.Write([]byte(err.Error()))
 		writer.WriteHeader(http.StatusInternalServerError)
 		return
 	}

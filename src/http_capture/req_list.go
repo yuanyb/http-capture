@@ -6,8 +6,8 @@ import (
 )
 
 type reqWrapper struct {
-	req *http.Request
-	waitChan chan byte  // 用于请求的等待
+	req      *http.Request
+	waitChan chan byte // 用于请求的等待
 }
 type requestList struct {
 	sync.Mutex

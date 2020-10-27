@@ -19,7 +19,6 @@ func flush() {
 	_ = os.Stdout.Sync()
 }
 
-
 func cmdToArgs(cmd string) []string {
 	var args []string
 	var closedChar byte      // 闭合字符 ' or "
@@ -51,8 +50,8 @@ func cmdToArgs(cmd string) []string {
 			addToArgs()
 		} else if cmd[i] != ' ' {
 			toCompleteArg += string(cmd[i])
-			if i == len(cmd) - 1 {
-			    addToArgs()
+			if i == len(cmd)-1 {
+				addToArgs()
 			}
 		}
 	}
