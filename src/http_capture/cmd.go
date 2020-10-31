@@ -300,17 +300,21 @@ func release() {
 	}
 	// 发送 release 信号前，修改状态，避免再有请求被拦截
 	atomic.StoreInt32(&curState, stateReleasing)
+	reqCount := 0
 	func() {
 		reqList := getReqList()
 		reqList.Lock()
 		defer reqList.Unlock()
-		for id := range getReqList().id2req {
+		reqCount = len(reqList.id2req)
+		for id := range reqList.id2req {
 			if req, ok := reqList.id2req[id]; ok {
 				req.waitChan <- 0
 			}
 		}
 	}()
 	// 等待，直到所有请求都释放掉
-	<-releaseDone
+	if reqCount != 0 { // 没有请求的话，判断，避免锁死
+		<-releaseDone
+	}
 	atomic.StoreInt32(&curState, stateNotStarted)
 }
